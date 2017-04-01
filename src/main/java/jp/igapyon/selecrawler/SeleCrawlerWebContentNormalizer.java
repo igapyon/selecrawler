@@ -60,7 +60,7 @@ public class SeleCrawlerWebContentNormalizer {
 			}
 		}.listFiles(new File(SeleCrawlerWebContentGetter.TARGET_DIR), true);
 
-		System.err.println("[seleniumutil] create/update '*" + SeleCrawlerConstants.EXT_SC_NORMALIZED + "' files.");
+		System.err.println("[selecrawler] create/update '*" + SeleCrawlerConstants.EXT_SC_NORMALIZED + "' files.");
 		for (File fileMeta : files) {
 			if (fileMeta.isDirectory()) {
 				continue;

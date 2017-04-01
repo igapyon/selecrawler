@@ -68,7 +68,7 @@ public class SeleCrawlerWebContentAnalyzer {
 			}
 		}.listFiles(new File(SeleCrawlerWebContentGetter.TARGET_DIR), true);
 
-		System.err.println("[seleniumutil] create/update '*" + SeleCrawlerConstants.EXT_SC_HEAD + "' and '*"
+		System.err.println("[selecrawler] create/update '*" + SeleCrawlerConstants.EXT_SC_HEAD + "' and '*"
 				+ SeleCrawlerConstants.EXT_SC_ANCHOR + "' files.");
 		for (File fileMeta : files) {
 			if (fileMeta.isDirectory()) {

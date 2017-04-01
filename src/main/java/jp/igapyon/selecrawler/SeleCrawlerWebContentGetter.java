@@ -51,7 +51,7 @@ public class SeleCrawlerWebContentGetter {
 	public static final String URLLIST_TXT = "./meta/urllist.txt";
 	public static final String URLLIST_EXCLUDE_REGEX_TXT = "./meta/urllist-exclude-regex.txt";
 
-	public static final String TARGET_DIR = "./target/seleniumutil/";
+	public static final String TARGET_DIR = "./target/selecrawler/";
 
 	public void process() throws IOException {
 		System.err.println("[jp.igapyon.selecrawler] Fetching web contents using Chrome.");
