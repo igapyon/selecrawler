@@ -53,7 +53,7 @@ public class SeleCrawlerWebContentNormalizer {
 				if (file.isDirectory()) {
 					return true;
 				}
-				if (file.getName().endsWith(".sc.url")) {
+				if (file.getName().endsWith(SeleCrawlerConstants.EXT_SC_URL)) {
 					return true;
 				}
 				return false;
@@ -66,8 +66,8 @@ public class SeleCrawlerWebContentNormalizer {
 				continue;
 			}
 
-			final File file = new File(fileMeta.getParentFile(),
-					fileMeta.getName().substring(0, fileMeta.getName().length() - ".sc.url".length()));
+			final File file = new File(fileMeta.getParentFile(), fileMeta.getName().substring(0,
+					fileMeta.getName().length() - SeleCrawlerConstants.EXT_SC_URL.length()));
 
 			processFile(file);
 		}

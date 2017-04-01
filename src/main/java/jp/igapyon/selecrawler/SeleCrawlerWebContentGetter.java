@@ -63,8 +63,7 @@ public class SeleCrawlerWebContentGetter {
 
 	public void processDevice(final String deviceName) throws IOException {
 		System.err.println("[selecrawler] Launch Chrome. UA:" + deviceName);
-		final SimpleChromeWrapper chrome = new SimpleChromeWrapper(DEFAULT_CHROMEDRIVER_PATH,
-				deviceName);
+		final SimpleChromeWrapper chrome = new SimpleChromeWrapper(DEFAULT_CHROMEDRIVER_PATH, deviceName);
 		chrome.open();
 
 		int getcounter = 0;
@@ -94,10 +93,9 @@ public class SeleCrawlerWebContentGetter {
 			}
 
 			final File outputMetaFile = new File(
-					TARGET_DIR + deviceName + "/" + serverhostname + path + ".sc.url");
+					TARGET_DIR + deviceName + "/" + serverhostname + path + SeleCrawlerConstants.EXT_SC_URL);
 
-			final File outputLogFile = new File(
-					TARGET_DIR + deviceName + "/" + serverhostname + path + ".sc.log");
+			final File outputLogFile = new File(TARGET_DIR + deviceName + "/" + serverhostname + path + ".sc.log");
 
 			if (outputMetaFile.exists()) {
 				if (IS_DEBUG)
