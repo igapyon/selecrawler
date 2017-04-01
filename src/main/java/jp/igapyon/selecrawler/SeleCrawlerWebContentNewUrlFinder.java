@@ -98,7 +98,8 @@ public class SeleCrawlerWebContentNewUrlFinder {
 			}
 		}
 
-		final File newurlcandidate = new File(new File(SeleCrawlerWebContentGetter.TARGET_DIR), "sc.newurlcandidate");
+		final File newurlcandidate = new File(new File(SeleCrawlerWebContentGetter.TARGET_DIR),
+				SeleCrawlerConstants.EXT_SC_NEWURLCANDIDATE);
 		System.err.println("[selecrawler] create/update new url candidate file: " + newurlcandidate.getCanonicalPath());
 		FileUtils.writeLines(newurlcandidate, urlList);
 	}
