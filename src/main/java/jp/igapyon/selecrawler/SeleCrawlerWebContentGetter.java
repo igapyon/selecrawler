@@ -50,8 +50,6 @@ public class SeleCrawlerWebContentGetter {
 
 	public static final String URLLIST_EXCLUDE_REGEX_TXT = "./meta/urllist-exclude-regex.txt";
 
-	public static final String TARGET_DIR = "./target/selecrawler/";
-
 	public void process(final SeleCrawlerSettings settings) throws IOException {
 		this.settings = settings;
 		System.err.println("[jp.igapyon.selecrawler] Fetching web contents using Chrome.");
@@ -70,7 +68,7 @@ public class SeleCrawlerWebContentGetter {
 
 		System.err.println(
 				"[selecrawler] Load url list file: " + new File(settings.getPathUrllisttTxt()).getCanonicalPath());
-		System.err.println("[selecrawler] Target dir: " + new File(TARGET_DIR).getCanonicalPath());
+		System.err.println("[selecrawler] Target dir: " + new File(settings.getPathTargetDir()).getCanonicalPath());
 
 		final List<String> urls = FileUtils.readLines(new File(settings.getPathUrllisttTxt()), "UTF-8");
 		for (String urlLookup : urls) {
@@ -88,16 +86,16 @@ public class SeleCrawlerWebContentGetter {
 				path = path + "/index.html";
 			}
 
-			final File outputFile = new File(TARGET_DIR + deviceName + "/" + serverhostname + path);
+			final File outputFile = new File(settings.getPathTargetDir() + deviceName + "/" + serverhostname + path);
 			if (outputFile.getParentFile().exists() == false) {
 				outputFile.getParentFile().mkdirs();
 			}
 
-			final File outputMetaFile = new File(
-					TARGET_DIR + deviceName + "/" + serverhostname + path + SeleCrawlerConstants.EXT_SC_URL);
+			final File outputMetaFile = new File(settings.getPathTargetDir() + deviceName + "/" + serverhostname + path
+					+ SeleCrawlerConstants.EXT_SC_URL);
 
-			final File outputLogFile = new File(
-					TARGET_DIR + deviceName + "/" + serverhostname + path + SeleCrawlerConstants.EXT_SC_LOG);
+			final File outputLogFile = new File(settings.getPathTargetDir() + deviceName + "/" + serverhostname + path
+					+ SeleCrawlerConstants.EXT_SC_LOG);
 
 			if (outputMetaFile.exists()) {
 				if (IS_DEBUG)

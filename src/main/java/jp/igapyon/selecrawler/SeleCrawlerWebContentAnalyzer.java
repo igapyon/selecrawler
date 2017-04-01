@@ -53,7 +53,10 @@ import jp.igapyon.selecrawler.util.SimpleMyXmlUtil;
 public class SeleCrawlerWebContentAnalyzer {
 	public static boolean IS_DEBUG = false;
 
-	public void process() throws IOException {
+	protected SeleCrawlerSettings settings = null;
+
+	public void process(final SeleCrawlerSettings settings) throws IOException {
+		this.settings=settings;
 		System.err.println("[jp.igapyon.selecrawler] Analyze web contents.");
 
 		final List<File> files = new SimpleDirParser() {
@@ -66,7 +69,7 @@ public class SeleCrawlerWebContentAnalyzer {
 				}
 				return false;
 			}
-		}.listFiles(new File(SeleCrawlerWebContentGetter.TARGET_DIR), true);
+		}.listFiles(new File(settings.getPathTargetDir()), true);
 
 		System.err.println("[selecrawler] create/update '*" + SeleCrawlerConstants.EXT_SC_HEAD + "' and '*"
 				+ SeleCrawlerConstants.EXT_SC_ANCHOR + "' files.");

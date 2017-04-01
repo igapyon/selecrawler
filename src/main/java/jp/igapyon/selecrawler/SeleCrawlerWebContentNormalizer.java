@@ -45,7 +45,10 @@ import jp.igapyon.selecrawler.util.SimpleHtmlNormalizerUtil;
 public class SeleCrawlerWebContentNormalizer {
 	public static boolean IS_DEBUG = false;
 
-	public void process() throws IOException {
+	protected SeleCrawlerSettings settings = null;
+
+	public void process(final SeleCrawlerSettings settings) throws IOException {
+		this.settings = settings;
 		System.err.println("[jp.igapyon.selecrawler] Normalize web contents.");
 
 		final List<File> files = new SimpleDirParser() {
@@ -58,7 +61,7 @@ public class SeleCrawlerWebContentNormalizer {
 				}
 				return false;
 			}
-		}.listFiles(new File(SeleCrawlerWebContentGetter.TARGET_DIR), true);
+		}.listFiles(new File(settings.getPathTargetDir()), true);
 
 		System.err.println("[selecrawler] create/update '*" + SeleCrawlerConstants.EXT_SC_NORMALIZED + "' files.");
 		for (File fileMeta : files) {

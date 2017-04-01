@@ -47,8 +47,8 @@ public class App {
 		System.err.println("[jp.igapyon.selecrawler] Simple sample half-automated web crawler.");
 		final SeleCrawlerSettings settings = new SeleCrawlerSettings();
 		new SeleCrawlerWebContentGetter().process(settings);
-		new SeleCrawlerWebContentNormalizer().process();
-		new SeleCrawlerWebContentAnalyzer().process();
+		new SeleCrawlerWebContentNormalizer().process(settings);
+		new SeleCrawlerWebContentAnalyzer().process(settings);
 		new SeleCrawlerWebContentNewUrlFinder().process(settings);
 	}
 }
