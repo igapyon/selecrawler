@@ -68,7 +68,8 @@ public class SeleCrawlerWebContentAnalyzer {
 			}
 		}.listFiles(new File(SeleCrawlerWebContentGetter.TARGET_DIR), true);
 
-		System.err.println("[seleniumutil] create/update '*.sc.head' and '*.sc.anchor' files.");
+		System.err.println(
+				"[seleniumutil] create/update '*" + SeleCrawlerConstants.EXT_SC_HEAD + "' and '*.sc.anchor' files.");
 		for (File fileMeta : files) {
 			if (fileMeta.isDirectory()) {
 				continue;
@@ -89,8 +90,8 @@ public class SeleCrawlerWebContentAnalyzer {
 		if (IS_DEBUG)
 			System.err.println(file.getCanonicalPath());
 
-		final String contents = FileUtils
-				.readFileToString(new File(file.getParentFile(), file.getName() + ".sc.normalized"), "UTF-8");
+		final String contents = FileUtils.readFileToString(
+				new File(file.getParentFile(), file.getName() + SeleCrawlerConstants.EXT_SC_NORMALIZED), "UTF-8");
 
 		final Document document = SimpleMyXmlUtil.string2Document(contents);
 		{
@@ -153,7 +154,7 @@ public class SeleCrawlerWebContentAnalyzer {
 		final File fileMetaAnchor = new File(file.getParentFile(), file.getName() + ".sc.anchor");
 		FileUtils.writeLines(fileMetaAnchor, "UTF-8", anchorList);
 
-		final File fileMetaHead = new File(file.getParentFile(), file.getName() + ".sc.head");
+		final File fileMetaHead = new File(file.getParentFile(), file.getName() + SeleCrawlerConstants.EXT_SC_HEAD);
 		FileUtils.writeLines(fileMetaHead, "UTF-8", headList);
 	}
 
