@@ -95,7 +95,8 @@ public class SeleCrawlerWebContentGetter {
 			final File outputMetaFile = new File(
 					TARGET_DIR + deviceName + "/" + serverhostname + path + SeleCrawlerConstants.EXT_SC_URL);
 
-			final File outputLogFile = new File(TARGET_DIR + deviceName + "/" + serverhostname + path + ".sc.log");
+			final File outputLogFile = new File(
+					TARGET_DIR + deviceName + "/" + serverhostname + path + SeleCrawlerConstants.EXT_SC_LOG);
 
 			if (outputMetaFile.exists()) {
 				if (IS_DEBUG)

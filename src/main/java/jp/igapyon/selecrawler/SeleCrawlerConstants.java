@@ -35,4 +35,8 @@ package jp.igapyon.selecrawler;
 
 public class SeleCrawlerConstants {
 	public static final String EXT_SC_URL = ".sc.url";
+
+	public static final String EXT_SC_LOG = ".sc.log";
+
+	public static final String EXT_SC_NORMALIZED = ".sc.normalized";
 }

@@ -60,7 +60,7 @@ public class SeleCrawlerWebContentNormalizer {
 			}
 		}.listFiles(new File(SeleCrawlerWebContentGetter.TARGET_DIR), true);
 
-		System.err.println("[seleniumutil] create/update '*.sc.normalized' files.");
+		System.err.println("[seleniumutil] create/update '*" + SeleCrawlerConstants.EXT_SC_NORMALIZED + "' files.");
 		for (File fileMeta : files) {
 			if (fileMeta.isDirectory()) {
 				continue;
@@ -80,7 +80,8 @@ public class SeleCrawlerWebContentNormalizer {
 		String contents = FileUtils.readFileToString(file, "UTF-8");
 		contents = SimpleHtmlNormalizerUtil.normalizeHtml(contents);
 
-		final File fileNormalized = new File(file.getParentFile(), file.getName() + ".sc.normalized");
+		final File fileNormalized = new File(file.getParentFile(),
+				file.getName() + SeleCrawlerConstants.EXT_SC_NORMALIZED);
 		FileUtils.writeStringToFile(fileNormalized, contents, "UTF-8");
 	}
 }
