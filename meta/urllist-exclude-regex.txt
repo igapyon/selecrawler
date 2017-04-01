@@ -1,0 +1,8 @@
+[http|https]\://feedback\.promotionalads\.yahoo\.co\.jp/
+[http|https]\://feedback\.premiads\.yahoo\.co\.jp/
+[http|https]\://rdsig\.yahoo\.co\.jp/
+[http|https]\://www\.yahoo\.co\.jp/;
+[http|https]\://app-adforce\.jp/
+[http|https]\://rd\.ane\.yahoo\.co\.jp/
+[http|https]\://calendar\.yahoo\.co\.jp/
+[http|https]\://ard\.yahoo\.co\.jp/

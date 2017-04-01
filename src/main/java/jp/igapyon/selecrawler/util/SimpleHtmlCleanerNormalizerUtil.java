@@ -31,23 +31,30 @@
  *  limitations under the License.
  */
 
-package jp.igapyon.selecrawler;
+package jp.igapyon.selecrawler.util;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.StringReader;
 
-/**
- * 
- */
-public class App {
-	public static void main(final String[] args) throws IOException, InterruptedException {
-		new App().process();
-	}
+import org.htmlcleaner.CleanerProperties;
+import org.htmlcleaner.HtmlCleaner;
+import org.htmlcleaner.PrettyXmlSerializer;
+import org.htmlcleaner.TagNode;
 
-	public void process() throws IOException {
-		System.err.println("[jp.igapyon.selecrawler] Simple sample half-automated web crawler.");
-		new SeleCrawlerWebContentGetter().process();
-		new SeleCrawlerWebContentNormalizer().process();
-		new SeleCrawlerWebContentAnalyzer().process();
-		new SeleCrawlerWebContentNewUrlFinder().process();
+class SimpleHtmlCleanerNormalizerUtil {
+	public static String normalizeHtml(final String source) throws IOException {
+		final CleanerProperties props = new CleanerProperties();
+		props.setOmitDoctypeDeclaration(true);
+		props.setKeepWhitespaceAndCommentsInHead(true);
+		props.setOmitComments(false);
+
+		final TagNode tagNode = new HtmlCleaner(props).clean(new StringReader(source));
+
+		final ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+		new PrettyXmlSerializer(props).writeToStream(tagNode, outStream, "UTF-8");
+		outStream.flush();
+
+		return new String(outStream.toByteArray(), "UTF-8");
 	}
 }

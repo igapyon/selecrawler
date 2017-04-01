@@ -31,23 +31,47 @@
  *  limitations under the License.
  */
 
-package jp.igapyon.selecrawler;
+package jp.igapyon.selecrawler.util;
 
 import java.io.IOException;
+import java.io.StringReader;
+import java.io.StringWriter;
 
-/**
- * 
- */
-public class App {
-	public static void main(final String[] args) throws IOException, InterruptedException {
-		new App().process();
-	}
+import org.ccil.cowan.tagsoup.HTMLSchema;
+import org.ccil.cowan.tagsoup.Parser;
+import org.ccil.cowan.tagsoup.XMLWriter;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.XMLReader;
 
-	public void process() throws IOException {
-		System.err.println("[jp.igapyon.selecrawler] Simple sample half-automated web crawler.");
-		new SeleCrawlerWebContentGetter().process();
-		new SeleCrawlerWebContentNormalizer().process();
-		new SeleCrawlerWebContentAnalyzer().process();
-		new SeleCrawlerWebContentNewUrlFinder().process();
+class SimpleTagSoupNormalizerUtil {
+	public static String normalizeHtml(final String source) throws IOException {
+		try {
+			final XMLReader parser = new Parser();
+
+			final HTMLSchema schema = new HTMLSchema();
+			parser.setProperty(Parser.schemaProperty, schema);
+
+			final StringWriter output = new StringWriter();
+
+			final XMLWriter serializer = new XMLWriter(output);
+			parser.setContentHandler(serializer);
+			parser.setFeature(Parser.namespacesFeature, false);
+
+			final InputSource input = new InputSource();
+			input.setCharacterStream(new StringReader(source));
+
+			serializer.setOutputProperty(XMLWriter.METHOD, "xhtml");
+			serializer.setOutputProperty(XMLWriter.OMIT_XML_DECLARATION, "yes");
+			parser.setFeature(Parser.defaultAttributesFeature, false);
+			serializer.setOutputProperty(XMLWriter.ENCODING, "UTF-8");
+			parser.setFeature("http://www.ccil.org/~cowan/tagsoup/features/ignore-bogons", false);
+
+			parser.parse(input);
+
+			return output.toString();
+		} catch (SAXException ex) {
+			throw new IOException(ex);
+		}
 	}
 }

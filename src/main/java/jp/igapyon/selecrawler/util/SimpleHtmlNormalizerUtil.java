@@ -31,23 +31,18 @@
  *  limitations under the License.
  */
 
-package jp.igapyon.selecrawler;
+package jp.igapyon.selecrawler.util;
 
 import java.io.IOException;
 
-/**
- * 
- */
-public class App {
-	public static void main(final String[] args) throws IOException, InterruptedException {
-		new App().process();
-	}
+public class SimpleHtmlNormalizerUtil {
+	public static final boolean IS_TAGSOUP = false;
 
-	public void process() throws IOException {
-		System.err.println("[jp.igapyon.selecrawler] Simple sample half-automated web crawler.");
-		new SeleCrawlerWebContentGetter().process();
-		new SeleCrawlerWebContentNormalizer().process();
-		new SeleCrawlerWebContentAnalyzer().process();
-		new SeleCrawlerWebContentNewUrlFinder().process();
+	public static String normalizeHtml(final String htmlContents) throws IOException {
+		if (IS_TAGSOUP) {
+			return SimpleTagSoupNormalizerUtil.normalizeHtml(htmlContents);
+		} else {
+			return SimpleHtmlCleanerNormalizerUtil.normalizeHtml(htmlContents);
+		}
 	}
 }
