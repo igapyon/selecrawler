@@ -68,8 +68,8 @@ public class SeleCrawlerWebContentAnalyzer {
 			}
 		}.listFiles(new File(SeleCrawlerWebContentGetter.TARGET_DIR), true);
 
-		System.err.println(
-				"[seleniumutil] create/update '*" + SeleCrawlerConstants.EXT_SC_HEAD + "' and '*.sc.anchor' files.");
+		System.err.println("[seleniumutil] create/update '*" + SeleCrawlerConstants.EXT_SC_HEAD + "' and '*"
+				+ SeleCrawlerConstants.EXT_SC_ANCHOR + "' files.");
 		for (File fileMeta : files) {
 			if (fileMeta.isDirectory()) {
 				continue;
@@ -151,7 +151,7 @@ public class SeleCrawlerWebContentAnalyzer {
 			}
 		}
 
-		final File fileMetaAnchor = new File(file.getParentFile(), file.getName() + ".sc.anchor");
+		final File fileMetaAnchor = new File(file.getParentFile(), file.getName() + SeleCrawlerConstants.EXT_SC_ANCHOR);
 		FileUtils.writeLines(fileMetaAnchor, "UTF-8", anchorList);
 
 		final File fileMetaHead = new File(file.getParentFile(), file.getName() + SeleCrawlerConstants.EXT_SC_HEAD);

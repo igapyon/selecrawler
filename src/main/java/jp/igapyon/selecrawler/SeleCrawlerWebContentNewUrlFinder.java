@@ -98,10 +98,8 @@ public class SeleCrawlerWebContentNewUrlFinder {
 			}
 		}
 
-		final File newurlcandidate = new File(new File(SeleCrawlerWebContentGetter.TARGET_DIR),
-				"sc.newurlcandidate");
-		System.err
-				.println("[selecrawler] create/update new url candidate file: " + newurlcandidate.getCanonicalPath());
+		final File newurlcandidate = new File(new File(SeleCrawlerWebContentGetter.TARGET_DIR), "sc.newurlcandidate");
+		System.err.println("[selecrawler] create/update new url candidate file: " + newurlcandidate.getCanonicalPath());
 		FileUtils.writeLines(newurlcandidate, urlList);
 	}
 
@@ -111,7 +109,7 @@ public class SeleCrawlerWebContentNewUrlFinder {
 				if (file.isDirectory()) {
 					return true;
 				}
-				if (file.getName().endsWith(".sc.anchor")) {
+				if (file.getName().endsWith(SeleCrawlerConstants.EXT_SC_ANCHOR)) {
 					return true;
 				}
 				return false;

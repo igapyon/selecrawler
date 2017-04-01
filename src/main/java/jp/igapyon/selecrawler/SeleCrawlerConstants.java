@@ -40,5 +40,7 @@ public class SeleCrawlerConstants {
 
 	public static final String EXT_SC_HEAD = ".sc.head";
 
+	public static final String EXT_SC_ANCHOR = ".sc.anchor";
+
 	public static final String EXT_SC_NORMALIZED = ".sc.normalized";
 }

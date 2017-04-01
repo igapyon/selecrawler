@@ -36,7 +36,7 @@ package jp.igapyon.selecrawler;
 import java.io.IOException;
 
 /**
- * 
+ * Simple sample app for SeleCrawler.
  */
 public class App {
 	public static void main(final String[] args) throws IOException, InterruptedException {
