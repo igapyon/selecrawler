@@ -48,8 +48,6 @@ public class SeleCrawlerWebContentGetter {
 
 	protected SeleCrawlerSettings settings = null;
 
-	public static final String URLLIST_EXCLUDE_REGEX_TXT = "./meta/urllist-exclude-regex.txt";
-
 	public void process(final SeleCrawlerSettings settings) throws IOException {
 		this.settings = settings;
 		System.err.println("[jp.igapyon.selecrawler] Fetching web contents using Chrome.");

@@ -56,7 +56,7 @@ public class SeleCrawlerWebContentAnalyzer {
 	protected SeleCrawlerSettings settings = null;
 
 	public void process(final SeleCrawlerSettings settings) throws IOException {
-		this.settings=settings;
+		this.settings = settings;
 		System.err.println("[jp.igapyon.selecrawler] Analyze web contents.");
 
 		final List<File> files = new SimpleDirParser() {

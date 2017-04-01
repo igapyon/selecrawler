@@ -84,7 +84,7 @@ public class SeleCrawlerWebContentNewUrlFinder {
 		for (int index = 0; index < urlList.size(); index++) {
 			final String url = urlList.get(index);
 			final List<String> excludeRegexList = FileUtils
-					.readLines(new File(SeleCrawlerWebContentGetter.URLLIST_EXCLUDE_REGEX_TXT), "UTF-8");
+					.readLines(new File(settings.getPathUrllistExcludeRegexTxt()), "UTF-8");
 			for (String regex : excludeRegexList) {
 				final Pattern pat = Pattern.compile(regex);
 				final Matcher mat = pat.matcher(url);
