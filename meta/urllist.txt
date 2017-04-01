@@ -1,1 +1,3 @@
 http://www.aozora.gr.jp/
+http://www.aozora.gr.jp/robots.txt
+https://www.google.com/robots.txt
