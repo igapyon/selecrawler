@@ -87,6 +87,7 @@ public class SeleCrawlerWebContentAnalyzer {
 	public void processFile(final File file, final String urlString) throws IOException {
 		final List<String> anchorList = new ArrayList<String>();
 		final List<String> headList = new ArrayList<String>();
+		final List<String> scriptSrcList = new ArrayList<String>();
 
 		final String contents = FileUtils.readFileToString(
 				new File(file.getParentFile(), file.getName() + SeleCrawlerConstants.EXT_SC_NORMALIZED), "UTF-8");
@@ -149,11 +150,38 @@ public class SeleCrawlerWebContentAnalyzer {
 			}
 		}
 
-		final File fileMetaAnchor = new File(file.getParentFile(), file.getName() + SeleCrawlerConstants.EXT_SC_ANCHOR);
-		FileUtils.writeLines(fileMetaAnchor, "UTF-8", anchorList);
+		{
+			// search script
+			final NodeList nodes = SimpleMyXmlUtil.getXPathNodeList(document, "//script");
+			for (int index = 0; index < nodes.getLength(); index++) {
+				if (nodes.item(index) instanceof Element) {
+					final Element eleScript = (Element) nodes.item(index);
+					String srcString = eleScript.getAttribute("src");
+					srcString = adjustAnchorUrl(srcString, urlString);
+					if (srcString == null) {
+						continue;
+					}
+					scriptSrcList.add(srcString);
+				}
+			}
+		}
 
-		final File fileMetaHead = new File(file.getParentFile(), file.getName() + SeleCrawlerConstants.EXT_SC_HEAD);
-		FileUtils.writeLines(fileMetaHead, "UTF-8", headList);
+		{
+			final File fileMetaAnchor = new File(file.getParentFile(),
+					file.getName() + SeleCrawlerConstants.EXT_SC_ANCHOR);
+			FileUtils.writeLines(fileMetaAnchor, "UTF-8", anchorList);
+		}
+
+		{
+			final File fileMetaHead = new File(file.getParentFile(), file.getName() + SeleCrawlerConstants.EXT_SC_HEAD);
+			FileUtils.writeLines(fileMetaHead, "UTF-8", headList);
+		}
+
+		{
+			final File fileScriptSrc = new File(file.getParentFile(),
+					file.getName() + SeleCrawlerConstants.EXT_SC_SCRIPTSRC);
+			FileUtils.writeLines(fileScriptSrc, "UTF-8", scriptSrcList);
+		}
 	}
 
 	public static String adjustAnchorUrl(String href, String urlString) throws MalformedURLException {
