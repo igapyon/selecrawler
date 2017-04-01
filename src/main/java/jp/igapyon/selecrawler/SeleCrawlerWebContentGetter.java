@@ -44,8 +44,6 @@ import org.apache.commons.io.FileUtils;
 import jp.igapyon.selecrawler.util.SimpleChromeWrapper;
 
 public class SeleCrawlerWebContentGetter {
-	public static final boolean IS_DEBUG = false;
-
 	protected SeleCrawlerSettings settings = null;
 
 	public void process(final SeleCrawlerSettings settings) throws IOException {
@@ -96,8 +94,9 @@ public class SeleCrawlerWebContentGetter {
 					+ SeleCrawlerConstants.EXT_SC_LOG);
 
 			if (outputMetaFile.exists()) {
-				if (IS_DEBUG)
+				if (settings.isDebug()) {
 					System.err.println("[selecrawler] skip(cache): " + urlLookup);
+				}
 				continue;
 			}
 

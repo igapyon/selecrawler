@@ -43,8 +43,6 @@ import jp.igapyon.diary.igapyonv3.util.SimpleDirParser;
 import jp.igapyon.selecrawler.util.SimpleHtmlNormalizerUtil;
 
 public class SeleCrawlerWebContentNormalizer {
-	public static boolean IS_DEBUG = false;
-
 	protected SeleCrawlerSettings settings = null;
 
 	public void process(final SeleCrawlerSettings settings) throws IOException {
@@ -77,9 +75,6 @@ public class SeleCrawlerWebContentNormalizer {
 	}
 
 	public void processFile(final File file) throws IOException {
-		if (IS_DEBUG)
-			System.err.println(file.getCanonicalPath());
-
 		String contents = FileUtils.readFileToString(file, "UTF-8");
 		contents = SimpleHtmlNormalizerUtil.normalizeHtml(contents);
 

@@ -51,8 +51,6 @@ import jp.igapyon.diary.igapyonv3.util.SimpleDirParser;
 import jp.igapyon.selecrawler.util.SimpleMyXmlUtil;
 
 public class SeleCrawlerWebContentAnalyzer {
-	public static boolean IS_DEBUG = false;
-
 	protected SeleCrawlerSettings settings = null;
 
 	public void process(final SeleCrawlerSettings settings) throws IOException {
@@ -89,9 +87,6 @@ public class SeleCrawlerWebContentAnalyzer {
 	public void processFile(final File file, final String urlString) throws IOException {
 		final List<String> anchorList = new ArrayList<String>();
 		final List<String> headList = new ArrayList<String>();
-
-		if (IS_DEBUG)
-			System.err.println(file.getCanonicalPath());
 
 		final String contents = FileUtils.readFileToString(
 				new File(file.getParentFile(), file.getName() + SeleCrawlerConstants.EXT_SC_NORMALIZED), "UTF-8");

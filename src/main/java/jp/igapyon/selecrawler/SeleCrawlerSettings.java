@@ -34,12 +34,22 @@
 package jp.igapyon.selecrawler;
 
 public class SeleCrawlerSettings {
+	protected boolean isDebug = false;
+
 	protected String pathChromeDriver = "../../chromedriver";
 
 	protected String pathUrllisttTxt = "./meta/urllist.txt";
 	protected String pathUrllistExcludeRegexTxt = "./meta/urllist-exclude-regex.txt";
 
 	protected String pathTargetDir = "./target/selecrawler/";
+
+	public boolean isDebug() {
+		return isDebug;
+	}
+
+	public void setDebug(boolean isDebug) {
+		this.isDebug = isDebug;
+	}
 
 	public String getPathChromeDriver() {
 		return pathChromeDriver;
