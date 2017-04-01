@@ -46,14 +46,14 @@ import jp.igapyon.selecrawler.util.SimpleChromeWrapper;
 public class SeleCrawlerWebContentGetter {
 	public static final boolean IS_DEBUG = false;
 
-	public static final String DEFAULT_CHROMEDRIVER_PATH = "../../chromedriver";
+	protected SeleCrawlerSettings settings = null;
 
-	public static final String URLLIST_TXT = "./meta/urllist.txt";
 	public static final String URLLIST_EXCLUDE_REGEX_TXT = "./meta/urllist-exclude-regex.txt";
 
 	public static final String TARGET_DIR = "./target/selecrawler/";
 
-	public void process() throws IOException {
+	public void process(final SeleCrawlerSettings settings) throws IOException {
+		this.settings = settings;
 		System.err.println("[jp.igapyon.selecrawler] Fetching web contents using Chrome.");
 
 		// process for each device.
@@ -63,15 +63,16 @@ public class SeleCrawlerWebContentGetter {
 
 	public void processDevice(final String deviceName) throws IOException {
 		System.err.println("[selecrawler] Launch Chrome. UA:" + deviceName);
-		final SimpleChromeWrapper chrome = new SimpleChromeWrapper(DEFAULT_CHROMEDRIVER_PATH, deviceName);
+		final SimpleChromeWrapper chrome = new SimpleChromeWrapper(settings.getPathChromeDriver(), deviceName);
 		chrome.open();
 
 		int getcounter = 0;
 
-		System.err.println("[selecrawler] Load url list file: " + new File(URLLIST_TXT).getCanonicalPath());
+		System.err.println(
+				"[selecrawler] Load url list file: " + new File(settings.getPathUrllisttTxt()).getCanonicalPath());
 		System.err.println("[selecrawler] Target dir: " + new File(TARGET_DIR).getCanonicalPath());
 
-		final List<String> urls = FileUtils.readLines(new File(URLLIST_TXT), "UTF-8");
+		final List<String> urls = FileUtils.readLines(new File(settings.getPathUrllisttTxt()), "UTF-8");
 		for (String urlLookup : urls) {
 			if (getcounter >= 10) {
 				// refresh chrome instance

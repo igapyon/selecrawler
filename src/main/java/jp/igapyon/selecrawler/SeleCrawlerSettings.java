@@ -33,22 +33,43 @@
 
 package jp.igapyon.selecrawler;
 
-import java.io.IOException;
+public class SeleCrawlerSettings {
+	protected String pathChromeDriver = "../../chromedriver";
 
-/**
- * Simple sample app for SeleCrawler.
- */
-public class App {
-	public static void main(final String[] args) throws IOException, InterruptedException {
-		new App().process();
+	protected String pathUrllisttTxt = "./meta/urllist.txt";
+	protected String pathUrllistExcludeRegexTxt = "./meta/urllist-exclude-regex.txt";
+
+	protected String pathTargetDir = "./target/selecrawler/";
+
+	public String getPathChromeDriver() {
+		return pathChromeDriver;
 	}
 
-	public void process() throws IOException {
-		System.err.println("[jp.igapyon.selecrawler] Simple sample half-automated web crawler.");
-		final SeleCrawlerSettings settings = new SeleCrawlerSettings();
-		new SeleCrawlerWebContentGetter().process(settings);
-		new SeleCrawlerWebContentNormalizer().process();
-		new SeleCrawlerWebContentAnalyzer().process();
-		new SeleCrawlerWebContentNewUrlFinder().process(settings);
+	public void setPathChromeDriver(String pathChromeDriver) {
+		this.pathChromeDriver = pathChromeDriver;
+	}
+
+	public String getPathUrllisttTxt() {
+		return pathUrllisttTxt;
+	}
+
+	public void setPathUrllisttTxt(String pathUrllisttTxt) {
+		this.pathUrllisttTxt = pathUrllisttTxt;
+	}
+
+	public String getPathUrllistExcludeRegexTxt() {
+		return pathUrllistExcludeRegexTxt;
+	}
+
+	public void setPathUrllistExcludeRegexTxt(String pathUrllistExcludeRegexTxt) {
+		this.pathUrllistExcludeRegexTxt = pathUrllistExcludeRegexTxt;
+	}
+
+	public String getPathTargetDir() {
+		return pathTargetDir;
+	}
+
+	public void setPathTargetDir(String pathTargetDir) {
+		this.pathTargetDir = pathTargetDir;
 	}
 }

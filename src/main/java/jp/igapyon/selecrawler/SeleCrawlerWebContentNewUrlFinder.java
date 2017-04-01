@@ -48,11 +48,10 @@ import org.apache.commons.io.FileUtils;
 import jp.igapyon.diary.igapyonv3.util.SimpleDirParser;
 
 public class SeleCrawlerWebContentNewUrlFinder {
-	public static void main(final String[] args) throws IOException {
-		new SeleCrawlerWebContentNewUrlFinder().process();
-	}
+	protected SeleCrawlerSettings settings = null;
 
-	public void process() throws IOException {
+	public void process(final SeleCrawlerSettings settings) throws IOException {
+		this.settings = settings;
 		System.err.println("[jp.igapyon.selecrawler] Find new url from fetched contents.");
 
 		final List<String> urlList = new ArrayList<String>();
@@ -68,8 +67,7 @@ public class SeleCrawlerWebContentNewUrlFinder {
 
 		// remove if already registered.
 		{
-			final List<String> registeredList = FileUtils.readLines(new File(SeleCrawlerWebContentGetter.URLLIST_TXT),
-					"UTF-8");
+			final List<String> registeredList = FileUtils.readLines(new File(settings.getPathUrllisttTxt()), "UTF-8");
 			final Map<String, String> registeredMap = new HashMap<String, String>();
 			for (String urlRegistered : registeredList) {
 				registeredMap.put(urlRegistered, urlRegistered);
