@@ -90,7 +90,7 @@ public class SeleCrawlerWebContentAnalyzer {
 		final List<String> scriptSrcList = new ArrayList<String>();
 
 		final String contents = FileUtils.readFileToString(
-				new File(file.getParentFile(), file.getName() + SeleCrawlerConstants.EXT_SC_NORMALIZED), "UTF-8");
+				new File(file.getParentFile(), file.getName() + SeleCrawlerConstants.EXT_SC_NORMAL), "UTF-8");
 
 		final Document document = SimpleMyXmlUtil.string2Document(contents);
 		{

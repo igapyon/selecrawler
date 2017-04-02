@@ -42,7 +42,9 @@ public class SeleCrawlerConstants {
 
 	public static final String EXT_SC_LOG = ".sc.log";
 
-	public static final String EXT_SC_NORMALIZED = ".sc.normal";
+	public static final String EXT_SC_NORMAL = ".sc.normal";
+
+	public static final String EXT_SC_NORMAL_TRIM = ".sc.normal.trim";
 
 	public static final String EXT_SC_HEAD = ".sc.head";
 

@@ -48,6 +48,7 @@ public class App {
 		final SeleCrawlerSettings settings = new SeleCrawlerSettings();
 		new SeleCrawlerWebContentGetter().process(settings);
 		new SeleCrawlerWebContentNormalizer().process(settings);
+		new SeleCrawlerWebContentTrimmer().process(settings);
 		new SeleCrawlerWebContentAnalyzer().process(settings);
 		new SeleCrawlerWebContentNewUrlFinder().process(settings);
 	}

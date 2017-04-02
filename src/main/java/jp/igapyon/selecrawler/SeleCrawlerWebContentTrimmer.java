@@ -33,21 +33,35 @@
 
 package jp.igapyon.selecrawler;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.TransformerFactoryConfigurationError;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
 import org.apache.commons.io.FileUtils;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import jp.igapyon.diary.igapyonv3.util.SimpleDirParser;
 import jp.igapyon.selecrawler.util.SimpleHtmlNormalizerUtil;
+import jp.igapyon.selecrawler.util.SimpleMyXmlUtil;
 
-public class SeleCrawlerWebContentNormalizer {
+public class SeleCrawlerWebContentTrimmer {
 	protected SeleCrawlerSettings settings = null;
 
 	public void process(final SeleCrawlerSettings settings) throws IOException {
 		this.settings = settings;
-		System.err.println("[jp.igapyon.selecrawler] Normalize web contents.");
+		System.err.println("[jp.igapyon.selecrawler] Trim web contents.");
 
 		final List<File> files = new SimpleDirParser() {
 			public boolean isProcessTarget(final File file) {
@@ -61,7 +75,7 @@ public class SeleCrawlerWebContentNormalizer {
 			}
 		}.listFiles(new File(settings.getPathTargetDir()), true);
 
-		System.err.println("[selecrawler] create/update '*" + SeleCrawlerConstants.EXT_SC_NORMAL + "' files.");
+		System.err.println("[selecrawler] create/update '*" + SeleCrawlerConstants.EXT_SC_NORMAL_TRIM + "' files.");
 		for (File fileMeta : files) {
 			if (fileMeta.isDirectory()) {
 				continue;
@@ -78,8 +92,47 @@ public class SeleCrawlerWebContentNormalizer {
 		String contents = FileUtils.readFileToString(file, "UTF-8");
 		contents = SimpleHtmlNormalizerUtil.normalizeHtml(contents);
 
-		final File fileNormalized = new File(file.getParentFile(),
-				file.getName() + SeleCrawlerConstants.EXT_SC_NORMAL);
-		FileUtils.writeStringToFile(fileNormalized, contents, "UTF-8");
+		final Document document = SimpleMyXmlUtil.string2Document(contents);
+
+		final Element elementRoot = document.getDocumentElement();
+
+		processElement(elementRoot);
+
+		try {
+			// write xml
+			final Transformer transformer = TransformerFactory.newInstance().newTransformer();
+			final DOMSource source = new DOMSource(elementRoot);
+			final ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+			final StreamResult target = new StreamResult(outStream);
+			transformer.transform(source, target);
+
+			outStream.flush();
+
+			final File fileNormalTrim = new File(file.getParentFile(),
+					file.getName() + SeleCrawlerConstants.EXT_SC_NORMAL_TRIM);
+			FileUtils.writeByteArrayToFile(fileNormalTrim, outStream.toByteArray());
+		} catch (TransformerConfigurationException ex) {
+			throw new IOException(ex);
+		} catch (TransformerFactoryConfigurationError ex) {
+			throw new IOException(ex);
+		} catch (TransformerException ex) {
+			throw new IOException(ex);
+		}
+	}
+
+	public void processElement(final Element element) throws IOException {
+		final NodeList nodeList = element.getChildNodes();
+		for (int index = nodeList.getLength() - 1; index >= 0; index--) {
+			final Node node = nodeList.item(index);
+			if (node instanceof Element) {
+				final Element lookup = (Element) node;
+				processElement(lookup);
+
+				if ("script".equals(lookup.getTagName())) {
+					// REMOVE script tag.
+					element.removeChild(node);
+				}
+			}
+		}
 	}
 }
