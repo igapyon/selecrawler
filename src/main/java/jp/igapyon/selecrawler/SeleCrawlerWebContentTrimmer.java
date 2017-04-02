@@ -137,6 +137,12 @@ public class SeleCrawlerWebContentTrimmer {
 					continue;
 				}
 
+				if ("noscript".equals(lookup.getTagName())) {
+					// REMOVE noscript tag.
+					element.removeChild(node);
+					continue;
+				}
+
 				if ("iframe".equals(lookup.getTagName())) {
 					final NamedNodeMap nnm = lookup.getAttributes();
 					for (int indexNnm = 0; indexNnm < nnm.getLength(); indexNnm++) {
