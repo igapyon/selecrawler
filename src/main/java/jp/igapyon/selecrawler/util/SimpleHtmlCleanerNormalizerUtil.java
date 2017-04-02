@@ -33,6 +33,7 @@
 
 package jp.igapyon.selecrawler.util;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.StringReader;
@@ -42,7 +43,7 @@ import org.htmlcleaner.HtmlCleaner;
 import org.htmlcleaner.PrettyXmlSerializer;
 import org.htmlcleaner.TagNode;
 
-class SimpleHtmlCleanerNormalizerUtil {
+public class SimpleHtmlCleanerNormalizerUtil {
 	public static String normalizeHtml(final String source) throws IOException {
 		final CleanerProperties props = new CleanerProperties();
 		props.setOmitDoctypeDeclaration(true);
@@ -56,5 +57,20 @@ class SimpleHtmlCleanerNormalizerUtil {
 		outStream.flush();
 
 		return new String(outStream.toByteArray(), "UTF-8");
+	}
+
+	public static byte[] normalizeHtml(final byte[] source) throws IOException {
+		final CleanerProperties props = new CleanerProperties();
+		props.setOmitDoctypeDeclaration(true);
+		props.setKeepWhitespaceAndCommentsInHead(true);
+		props.setOmitComments(false);
+
+		final TagNode tagNode = new HtmlCleaner(props).clean(new ByteArrayInputStream(source));
+
+		final ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+		new PrettyXmlSerializer(props).writeToStream(tagNode, outStream, "UTF-8");
+		outStream.flush();
+
+		return outStream.toByteArray();
 	}
 }

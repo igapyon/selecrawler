@@ -78,8 +78,7 @@ public class SeleCrawlerWebContentNormalizer {
 		String contents = FileUtils.readFileToString(file, "UTF-8");
 		contents = SimpleHtmlNormalizerUtil.normalizeHtml(contents);
 
-		final File fileNormalized = new File(file.getParentFile(),
-				file.getName() + SeleCrawlerConstants.EXT_SC_NORMAL);
+		final File fileNormalized = new File(file.getParentFile(), file.getName() + SeleCrawlerConstants.EXT_SC_NORMAL);
 		FileUtils.writeStringToFile(fileNormalized, contents, "UTF-8");
 	}
 }

@@ -53,6 +53,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import jp.igapyon.diary.igapyonv3.util.SimpleDirParser;
+import jp.igapyon.selecrawler.util.SimpleHtmlCleanerNormalizerUtil;
 import jp.igapyon.selecrawler.util.SimpleHtmlNormalizerUtil;
 import jp.igapyon.selecrawler.util.SimpleMyXmlUtil;
 
@@ -110,7 +111,8 @@ public class SeleCrawlerWebContentTrimmer {
 
 			final File fileNormalTrim = new File(file.getParentFile(),
 					file.getName() + SeleCrawlerConstants.EXT_SC_NORMAL_TRIM);
-			FileUtils.writeByteArrayToFile(fileNormalTrim, outStream.toByteArray());
+			FileUtils.writeByteArrayToFile(fileNormalTrim,
+					SimpleHtmlCleanerNormalizerUtil.normalizeHtml(outStream.toByteArray()));
 		} catch (TransformerConfigurationException ex) {
 			throw new IOException(ex);
 		} catch (TransformerFactoryConfigurationError ex) {
