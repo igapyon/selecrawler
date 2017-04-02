@@ -47,8 +47,10 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import org.apache.commons.io.FileUtils;
+import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -133,6 +135,25 @@ public class SeleCrawlerWebContentTrimmer {
 					// REMOVE script tag.
 					element.removeChild(node);
 					continue;
+				}
+
+				if ("iframe".equals(lookup.getTagName())) {
+					final NamedNodeMap nnm = lookup.getAttributes();
+					for (int indexNnm = 0; indexNnm < nnm.getLength(); indexNnm++) {
+						final Attr attr = (Attr) nnm.item(indexNnm);
+
+						// System.out.println(" " + attr.getName() + " [" +
+						// attr.getValue() + "]");
+						if ("style".equals(attr.getName())) {
+							final String value = attr.getValue().replaceAll(" ", "");
+							if (value.indexOf("display:none") >= 0) {
+								// REMOVE iframe tag which is display:none
+								// style..
+								element.removeChild(node);
+								continue;
+							}
+						}
+					}
 				}
 
 				processElement(lookup);
