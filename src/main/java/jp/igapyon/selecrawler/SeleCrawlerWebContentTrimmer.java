@@ -128,12 +128,14 @@ public class SeleCrawlerWebContentTrimmer {
 			final Node node = nodeList.item(index);
 			if (node instanceof Element) {
 				final Element lookup = (Element) node;
-				processElement(lookup);
 
 				if ("script".equals(lookup.getTagName())) {
 					// REMOVE script tag.
 					element.removeChild(node);
+					continue;
 				}
+
+				processElement(lookup);
 			}
 		}
 	}
