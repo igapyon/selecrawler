@@ -40,6 +40,7 @@ public class SeleCrawlerSettings {
 
 	protected String pathUrllisttTxt = "./meta/urllist.txt";
 	protected String pathUrllistExcludeRegexTxt = "./meta/urllist-exclude-regex.txt";
+	protected String pathUrllistWaitRegexTxt = "./meta/urllist-wait-regex.txt";
 
 	protected String pathTargetDir = "./target/selecrawler/";
 
@@ -81,5 +82,13 @@ public class SeleCrawlerSettings {
 
 	public void setPathTargetDir(String pathTargetDir) {
 		this.pathTargetDir = pathTargetDir;
+	}
+
+	public String getPathUrllistWaitRegexTxt() {
+		return pathUrllistWaitRegexTxt;
+	}
+
+	public void setPathUrllistWaitRegexTxt(String pathUrllistWaitRegexTxt) {
+		this.pathUrllistWaitRegexTxt = pathUrllistWaitRegexTxt;
 	}
 }

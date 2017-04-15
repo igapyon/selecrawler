@@ -38,6 +38,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.io.FileUtils;
 
@@ -103,6 +105,26 @@ public class SeleCrawlerWebContentGetter {
 			System.err.println("[selecrawler] fetch web: " + urlLookup);
 
 			chrome.getDriver().get(urlLookup);
+
+			{
+				final String urlActual = chrome.getDriver().getCurrentUrl();
+				final List<String> waitRegexList = FileUtils.readLines(new File(settings.getPathUrllistWaitRegexTxt()),
+						"UTF-8");
+				for (String regex : waitRegexList) {
+					final Pattern pat = Pattern.compile(regex);
+					final Matcher mat = pat.matcher(urlActual);
+
+					if (mat.find()) {
+						try {
+							System.out.println("please setup");
+							Thread.sleep(10000);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+
 			final String contents = chrome.getDriver().getPageSource();
 			FileUtils.writeStringToFile(outputFile, contents, "UTF-8");
 

@@ -52,7 +52,7 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class SimpleChromeWrapper {
-	public static final int WAIT_TIMEOUT_SECONDS = 20;
+	public static final int WAIT_TIMEOUT_SECONDS = 60;
 
 	protected WebDriver driver = null;
 	protected String deviceName = null;
@@ -111,6 +111,10 @@ public class SimpleChromeWrapper {
 					mobileEmulationMap.put("deviceName", "Apple iPhone 6");
 					chromeOptions.setExperimentalOption("mobileEmulation", mobileEmulationMap);
 				}
+
+				// /opt/google/chrome/chrome --user-data-dir=mychromedir
+				chromeOptions.addArguments("user-data-dir=/home/user1/mychromedir");
+
 				capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
 			}
 		}
