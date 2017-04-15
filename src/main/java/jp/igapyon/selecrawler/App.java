@@ -49,6 +49,7 @@ public class App {
 
 		settings.setPathChromeDriver("../../chromedriver");
 		settings.setPathUserDataDir("/home/user1/mychromedir");
+		// settings.setProcessIphone(false);
 
 		new SeleCrawlerWebContentGetter().process(settings);
 		new SeleCrawlerWebContentNormalizer().process(settings);
