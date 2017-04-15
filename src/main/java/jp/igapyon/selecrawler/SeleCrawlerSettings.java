@@ -42,7 +42,7 @@ import org.apache.commons.io.FileUtils;
 public class SeleCrawlerSettings {
 	protected boolean isDebug = false;
 
-	protected String pathChromeDriver = "../../chromedriver";
+	protected String pathChromeDriver = "./chromedriver";
 
 	protected String pathUrllisttTxt = "./meta/urllist.txt";
 	protected String pathUrllistExcludeRegexTxt = "./meta/urllist-exclude-regex.txt";

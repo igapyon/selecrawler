@@ -47,6 +47,7 @@ public class App {
 		System.err.println("[jp.igapyon.selecrawler] Simple sample half-automated web crawler.");
 		final SeleCrawlerSettings settings = new SeleCrawlerSettings();
 
+		settings.setPathChromeDriver("../../chromedriver");
 		// settings.setPathUserDataDir("/home/user1/mychromedir");
 
 		new SeleCrawlerWebContentGetter().process(settings);
