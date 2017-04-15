@@ -42,6 +42,9 @@ import org.apache.commons.io.FileUtils;
 public class SeleCrawlerSettings {
 	protected boolean isDebug = false;
 
+	private boolean isProcessMac = true;
+	private boolean isProcessIphone = true;
+
 	protected String pathChromeDriver = "./chromedriver";
 
 	protected String pathUrllisttTxt = "./meta/urllist.txt";
@@ -134,5 +137,21 @@ public class SeleCrawlerSettings {
 	 */
 	public void setPathUserDataDir(String pathUserDataDir) {
 		this.pathUserDataDir = pathUserDataDir;
+	}
+
+	public boolean isProcessMac() {
+		return isProcessMac;
+	}
+
+	public void setProcessMac(boolean isProcessMac) {
+		this.isProcessMac = isProcessMac;
+	}
+
+	public boolean isProcessIphone() {
+		return isProcessIphone;
+	}
+
+	public void setProcessIphone(boolean isProcessIphone) {
+		this.isProcessIphone = isProcessIphone;
 	}
 }

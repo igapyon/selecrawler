@@ -53,8 +53,12 @@ public class SeleCrawlerWebContentGetter {
 		System.err.println("[jp.igapyon.selecrawler] Fetching web contents using Chrome.");
 
 		// process for each device.
-		processDevice("mac");
-		processDevice("ios");
+		if (settings.isProcessMac()) {
+			processDevice("mac");
+		}
+		if (settings.isProcessIphone()) {
+			processDevice("iphone");
+		}
 	}
 
 	public void processDevice(final String deviceName) throws IOException {

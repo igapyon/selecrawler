@@ -54,6 +54,8 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 public class SimpleChromeWrapper {
 	public static final int WAIT_TIMEOUT_SECONDS = 60;
 
+	public static final String DEVICE_IPHONE = "iphone";
+
 	protected WebDriver driver = null;
 	protected String deviceName = null;
 	protected String userDataDir = null;
@@ -71,6 +73,16 @@ public class SimpleChromeWrapper {
 				System.err.println("WARN: chrome driver file is not a file: " + driverPath);
 			} else if (fileDriver.canExecute() == false) {
 				System.err.println("WARN: chrome driver file seems not an executable file: " + driverPath);
+			}
+		}
+		{
+			if (userDataDir != null && userDataDir.trim().length() > 0) {
+				final File fileUserDataDir = new File(userDataDir);
+				if (fileUserDataDir.exists() == false) {
+					System.err.println("WARN: chrome user data dir not found: " + userDataDir);
+				} else if (fileUserDataDir.isDirectory() == false) {
+					System.err.println("WARN: chrome user data dir is not a file: " + userDataDir);
+				}
 			}
 		}
 	}
@@ -108,7 +120,7 @@ public class SimpleChromeWrapper {
 					chromeOptions.setExperimentalOption("prefs", prefsMap);
 				}
 
-				if ("ios".equals(deviceName)) {
+				if (DEVICE_IPHONE.equals(deviceName)) {
 					final Map<String, String> mobileEmulationMap = new HashMap<String, String>();
 					mobileEmulationMap.put("deviceName", "Apple iPhone 6");
 					chromeOptions.setExperimentalOption("mobileEmulation", mobileEmulationMap);

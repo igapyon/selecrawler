@@ -48,7 +48,7 @@ public class App {
 		final SeleCrawlerSettings settings = new SeleCrawlerSettings();
 
 		settings.setPathChromeDriver("../../chromedriver");
-		// settings.setPathUserDataDir("/home/user1/mychromedir");
+		settings.setPathUserDataDir("/home/user1/mychromedir");
 
 		new SeleCrawlerWebContentGetter().process(settings);
 		new SeleCrawlerWebContentNormalizer().process(settings);
