@@ -107,16 +107,14 @@ public class SeleCrawlerWebContentGetter {
 			chrome.getDriver().get(urlLookup);
 
 			{
+				// check wait settings.
 				final String urlActual = chrome.getDriver().getCurrentUrl();
-				final List<String> waitRegexList = FileUtils.readLines(new File(settings.getPathUrllistWaitRegexTxt()),
-						"UTF-8");
-				for (String regex : waitRegexList) {
+				for (String regex : settings.getUrllistWaitRegex()) {
 					final Pattern pat = Pattern.compile(regex);
 					final Matcher mat = pat.matcher(urlActual);
-
 					if (mat.find()) {
 						try {
-							System.out.println("please setup");
+							System.out.println("waiting browser operation");
 							Thread.sleep(10000);
 						} catch (InterruptedException e) {
 							e.printStackTrace();

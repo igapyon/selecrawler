@@ -33,6 +33,12 @@
 
 package jp.igapyon.selecrawler;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
+import org.apache.commons.io.FileUtils;
+
 public class SeleCrawlerSettings {
 	protected boolean isDebug = false;
 
@@ -43,6 +49,15 @@ public class SeleCrawlerSettings {
 	protected String pathUrllistWaitRegexTxt = "./meta/urllist-wait-regex.txt";
 
 	protected String pathTargetDir = "./target/selecrawler/";
+
+	private List<String> waitRegexList = null;
+
+	public List<String> getUrllistWaitRegex() throws IOException {
+		if (waitRegexList == null) {
+			waitRegexList = FileUtils.readLines(new File(getPathUrllistWaitRegexTxt()), "UTF-8");
+		}
+		return waitRegexList;
+	}
 
 	public boolean isDebug() {
 		return isDebug;
