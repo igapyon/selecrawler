@@ -56,9 +56,11 @@ public class SimpleChromeWrapper {
 
 	protected WebDriver driver = null;
 	protected String deviceName = null;
+	protected String userDataDir = null;
 
-	public SimpleChromeWrapper(final String driverPath, final String deviceName) {
+	public SimpleChromeWrapper(final String driverPath, final String deviceName, final String userDataDir) {
 		this.deviceName = deviceName;
+		this.userDataDir = userDataDir;
 
 		System.setProperty("webdriver.chrome.driver", driverPath);
 		{
@@ -112,8 +114,9 @@ public class SimpleChromeWrapper {
 					chromeOptions.setExperimentalOption("mobileEmulation", mobileEmulationMap);
 				}
 
-				// /opt/google/chrome/chrome --user-data-dir=mychromedir
-				chromeOptions.addArguments("user-data-dir=/home/user1/mychromedir");
+				if (userDataDir != null && userDataDir.trim().length() > 0) {
+					chromeOptions.addArguments("user-data-dir=" + userDataDir);
+				}
 
 				capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
 			}

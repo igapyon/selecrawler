@@ -59,7 +59,8 @@ public class SeleCrawlerWebContentGetter {
 
 	public void processDevice(final String deviceName) throws IOException {
 		System.err.println("[selecrawler] Launch Chrome. UA:" + deviceName);
-		final SimpleChromeWrapper chrome = new SimpleChromeWrapper(settings.getPathChromeDriver(), deviceName);
+		final SimpleChromeWrapper chrome = new SimpleChromeWrapper(settings.getPathChromeDriver(), deviceName,
+				settings.getPathUserDataDir());
 		chrome.open();
 
 		int getcounter = 0;

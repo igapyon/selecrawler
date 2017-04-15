@@ -48,6 +48,17 @@ public class SeleCrawlerSettings {
 	protected String pathUrllistExcludeRegexTxt = "./meta/urllist-exclude-regex.txt";
 	protected String pathUrllistWaitRegexTxt = "./meta/urllist-wait-regex.txt";
 
+	/**
+	 * Chrome user-data-dir
+	 * 
+	 * ex: /home/user1/mychromedir
+	 * 
+	 * prepare settings: <code> 
+	 * /opt/google/chrome/chrome --user-data-dir=mychromedir
+	 * </code>
+	 */
+	protected String pathUserDataDir = null;
+
 	protected String pathTargetDir = "./target/selecrawler/";
 
 	private List<String> waitRegexList = null;
@@ -105,5 +116,23 @@ public class SeleCrawlerSettings {
 
 	public void setPathUrllistWaitRegexTxt(String pathUrllistWaitRegexTxt) {
 		this.pathUrllistWaitRegexTxt = pathUrllistWaitRegexTxt;
+	}
+
+	public String getPathUserDataDir() {
+		return pathUserDataDir;
+	}
+
+	/**
+	 * Chrome user-data-dir
+	 * 
+	 * prepare settings: <code> 
+	 * /opt/google/chrome/chrome --user-data-dir=mychromedir
+	 * </code>
+	 * 
+	 * @param pathUserDataDir
+	 *            ex: /home/user1/mychromedir
+	 */
+	public void setPathUserDataDir(String pathUserDataDir) {
+		this.pathUserDataDir = pathUserDataDir;
 	}
 }
