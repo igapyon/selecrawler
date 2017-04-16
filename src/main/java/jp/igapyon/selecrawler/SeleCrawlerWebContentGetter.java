@@ -151,4 +151,14 @@ public class SeleCrawlerWebContentGetter {
 
 		chrome.close();
 	}
+
+	public File getFileHtml(final String deviceName, final String urlLookup) throws IOException {
+		final URL url = new URL(urlLookup);
+		final String serverhostname = url.getHost();
+		String path = url.getPath();
+		if (path.length() == 0 || path.equals("/") || path.endsWith("/")) {
+			path = path + "/index.html";
+		}
+		return new File(settings.getPathTargetDir() + deviceName + "/" + serverhostname + path);
+	}
 }
