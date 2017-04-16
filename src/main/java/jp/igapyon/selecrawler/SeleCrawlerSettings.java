@@ -129,11 +129,11 @@ public class SeleCrawlerSettings {
 	 * Chrome user-data-dir
 	 * 
 	 * prepare settings: <code> 
-	 * /opt/google/chrome/chrome --user-data-dir=mychromedir
+	 * /opt/google/chrome/chrome --user-data-dir=/home/user1/chromeprof
 	 * </code>
 	 * 
 	 * @param pathUserDataDir
-	 *            ex: /home/user1/mychromedir
+	 *            ex: /home/user1/chromeprof
 	 */
 	public void setPathUserDataDir(String pathUserDataDir) {
 		this.pathUserDataDir = pathUserDataDir;

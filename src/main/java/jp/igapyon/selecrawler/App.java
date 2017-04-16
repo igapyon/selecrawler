@@ -48,9 +48,14 @@ public class App {
 		final SeleCrawlerSettings settings = new SeleCrawlerSettings();
 
 		// settings.setDebug(true);
-		settings.setPathChromeDriver("../../chromedriver");
-		settings.setPathUserDataDir("/home/user1/mychromedir");
 		// settings.setProcessIphone(false);
+
+		// full path of chromedriver
+		settings.setPathChromeDriver("../../chromedriver");
+
+		// Google Chrome profile
+		// /opt/google/chrome/chrome --user-data-dir=/home/user1/chromeprof
+		settings.setPathUserDataDir("/home/user1/chromeprof");
 
 		new SeleCrawlerWebContentGetter().process(settings);
 		new SeleCrawlerWebContentNormalizer().process(settings);
