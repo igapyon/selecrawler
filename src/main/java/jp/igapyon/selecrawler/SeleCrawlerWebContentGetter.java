@@ -41,6 +41,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.codec.EncoderException;
+import org.apache.commons.codec.net.URLCodec;
 import org.apache.commons.io.FileUtils;
 
 import jp.igapyon.selecrawler.util.SimpleChromeWrapper;
@@ -154,8 +156,12 @@ public class SeleCrawlerWebContentGetter {
 		}
 
 		if (url.getQuery() != null) {
-			System.out.println("query:" + url.getQuery());
-			path += url.getQuery();
+			try {
+				path += new URLCodec().encode("?" + url.getQuery());
+			} catch (EncoderException e) {
+				e.printStackTrace();
+			}
+
 		}
 
 		return new File(settings.getPathTargetDir() + deviceName + "/" + serverhostname + path);
