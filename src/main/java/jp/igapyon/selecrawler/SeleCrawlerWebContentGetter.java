@@ -82,23 +82,16 @@ public class SeleCrawlerWebContentGetter {
 				chrome.open();
 			}
 
-			final URL url = new URL(urlLookup);
-			final String serverhostname = url.getHost();
-			String path = url.getPath();
-			if (path.length() == 0 || path.equals("/") || path.endsWith("/")) {
-				path = path + "/index.html";
-			}
-
-			final File outputFile = new File(settings.getPathTargetDir() + deviceName + "/" + serverhostname + path);
+			final File outputFile = getFileHtml(deviceName, urlLookup);
 			if (outputFile.getParentFile().exists() == false) {
 				outputFile.getParentFile().mkdirs();
 			}
 
-			final File outputMetaFile = new File(settings.getPathTargetDir() + deviceName + "/" + serverhostname + path
-					+ SeleCrawlerConstants.EXT_SC_URL);
+			final File outputMetaFile = new File(outputFile.getParentFile(),
+					outputFile.getName() + SeleCrawlerConstants.EXT_SC_URL);
 
-			final File outputLogFile = new File(settings.getPathTargetDir() + deviceName + "/" + serverhostname + path
-					+ SeleCrawlerConstants.EXT_SC_LOG);
+			final File outputLogFile = new File(outputFile.getParentFile(),
+					outputFile.getName() + SeleCrawlerConstants.EXT_SC_LOG);
 
 			if (outputMetaFile.exists()) {
 				if (settings.isDebug()) {
@@ -159,6 +152,7 @@ public class SeleCrawlerWebContentGetter {
 		if (path.length() == 0 || path.equals("/") || path.endsWith("/")) {
 			path = path + "/index.html";
 		}
+
 		return new File(settings.getPathTargetDir() + deviceName + "/" + serverhostname + path);
 	}
 }
