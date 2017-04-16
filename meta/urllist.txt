@@ -1,3 +1,4 @@
 http://www.aozora.gr.jp/
 http://www.aozora.gr.jp/robots.txt
+http://www.aozora.gr.jp/index_pages/person148.html#sakuhin_list_1?id=12345
 https://www.google.com/robots.txt
