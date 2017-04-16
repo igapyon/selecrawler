@@ -153,6 +153,11 @@ public class SeleCrawlerWebContentGetter {
 			path = path + "/index.html";
 		}
 
+		if (url.getQuery() != null) {
+			System.out.println("query:" + url.getQuery());
+			path += url.getQuery();
+		}
+
 		return new File(settings.getPathTargetDir() + deviceName + "/" + serverhostname + path);
 	}
 }
